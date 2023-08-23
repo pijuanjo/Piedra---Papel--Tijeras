@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Shortcut Icon" href="./images/lapiz (1).png"></i>
+    <title>Juego | Repaso</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <h1>PIEDRA - PAPEL - TIJERAS
+    </h1>
+    <h1 class="dipsy">JUANJO</h1>
+    
+    <div id="resultado">
+
+    <div id="texto">
+        Resultado de la batalla es:
+    </div>
+</div>
+
+
+
+    <div class="coco">
+        <button id="piedra" type="button" class="boton">
+            <img src="images/piedra.png"/>
+        </button>
+
+        <button id="papel" type="button" class="boton">
+            <img src="images/papel5.png"/>
+        </button>
+
+        <button id="tijeras" type="button" class="boton">
+            <img src="images/tijeras.png"/>
+        </button>
+    </div>
+
+    
+
+
+
+    <script>
+        const options = ["piedra", "papel", "tijeras"];
+
+        function computerPlay() {
+            const randomIndex = Math.floor(Math.random() * options.length);
+            return options[randomIndex];
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            playerSelection = playerSelection.toLowerCase();
+            computerSelection = computerSelection.toLowerCase();
+
+            if (playerSelection === computerSelection) {
+                resultado.innerHTML = "Es un empate :O"
+            } else if (
+                (playerSelection === "piedra" && computerSelection === "tijeras") ||
+                (playerSelection === "papel" && computerSelection === "piedra") ||
+                (playerSelection === "tijeras" && computerSelection === "papel")
+            ) {
+                resultado.innerHTML = "Ganaste!";
+            } else {
+                resultado.innerHTML = "Perdiste, intentalo de nuevo :D";
+            }
+        }
+
+        
+
+        function displayResult(result) {
+            const resultDiv = document.createElement("div");
+            resultDiv.textContent = result;
+            document.body.appendChild(resultDiv);
+        }
+
+        const buttons = document.querySelectorAll(".boton");
+        buttons.forEach(button => {
+            button.addEventListener("click", function() {
+                const playerSelection = this.id;
+                const computerSelection = computerPlay();
+                const result = playRound(playerSelection, computerSelection);
+                displayResult(result);
+            });
+        });
+    </script>
+
+    <!---->
+    
+</body>
+</html>
